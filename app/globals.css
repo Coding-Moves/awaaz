@@ -199,6 +199,7 @@ footer div { display: flex; gap: 1.1rem; }
 .dropzone small { font-size: .85rem; }
 
 .input-footer { align-items: center; display: flex; flex-wrap: wrap; gap: .75rem; justify-content: space-between; margin-top: 1rem; }
+.input-actions { align-items: center; display: flex; flex-wrap: wrap; gap: .5rem; }
 .hint { color: var(--muted); font-size: .85rem; margin: 0; }
 .error-text { color: #a8432f; font-size: .9rem; margin: .75rem 0 0; }
 
