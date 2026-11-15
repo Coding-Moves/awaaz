@@ -5,21 +5,22 @@ import { speakable } from "./text";
 
 export type EngineKind = "kokoro" | "browser";
 export type ModelStatus = "idle" | "loading" | "ready" | "error";
+export type ModelDevice = "webgpu" | "wasm";
 
 export type PlayerEvents = {
   onIndex: (index: number) => void;
   onPlaying: (playing: boolean) => void;
   onBuffering: (buffering: boolean) => void;
-  onModel: (status: ModelStatus, progress: number, error?: string) => void;
+  onModel: (status: ModelStatus, progress: number, error?: string, device?: ModelDevice) => void;
   onFinished: () => void;
   onChunkError: (message: string) => void;
 };
 
-const PREFETCH = 3; // how many chunks ahead to prepare
+const PREFETCH = 4; // how many chunks ahead to prepare
 
 type WorkerReply =
   | { type: "progress"; loaded: number; total: number }
-  | { type: "ready" }
+  | { type: "ready"; device: ModelDevice }
   | { type: "error"; message: string }
   | { type: "audio"; id: number; audio: Float32Array; sampleRate: number }
   | { type: "gen-error"; id: number; message: string };
@@ -318,7 +319,7 @@ export class Player {
       }
       case "ready":
         this.modelStatus = "ready";
-        this.ev.onModel("ready", 100);
+        this.ev.onModel("ready", 100, undefined, msg.device);
         this.pump();
         return;
       case "error":

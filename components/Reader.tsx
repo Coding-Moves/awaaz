@@ -2,7 +2,7 @@
 
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { extractFile } from "@/lib/extract";
-import { Player, type EngineKind, type ModelStatus } from "@/lib/player";
+import { Player, type EngineKind, type ModelDevice, type ModelStatus } from "@/lib/player";
 import { deleteBook, getBook, listBooks, saveBook, updatePosition, type SavedBook } from "@/lib/storage";
 import { guessTitle, hashText, prepareText, type Prepared } from "@/lib/text";
 
@@ -50,7 +50,7 @@ export default function Reader() {
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [buffering, setBuffering] = useState(false);
-  const [model, setModel] = useState<{ status: ModelStatus; progress: number; error?: string }>({ status: "idle", progress: 0 });
+  const [model, setModel] = useState<{ status: ModelStatus; progress: number; error?: string; device?: ModelDevice }>({ status: "idle", progress: 0 });
   // This component only renders in the browser (see ReaderClient), so localStorage is safe here.
   const [initialPrefs] = useState(loadPrefs);
   const [engine, setEngineState] = useState<EngineKind>(initialPrefs.engine ?? "kokoro");
@@ -80,8 +80,8 @@ export default function Reader() {
       onIndex: setIndex,
       onPlaying: setPlaying,
       onBuffering: setBuffering,
-      onModel: (status, progress, err) => {
-        setModel({ status, progress, error: err });
+      onModel: (status, progress, err, device) => {
+        setModel({ status, progress, error: err, device });
         if (status === "error") {
           // Keep reading with the built-in browser voice instead of stopping.
           p.setEngine("browser");
@@ -256,7 +256,7 @@ export default function Reader() {
     engine === "browser"
       ? "Browser voice"
       : model.status === "ready"
-        ? "Natural voice ready"
+        ? `Natural voice ready · ${model.device === "webgpu" ? "GPU" : "CPU"}`
         : model.status === "loading"
           ? `Downloading voice… ${model.progress}% (first time only)`
           : model.status === "error"
