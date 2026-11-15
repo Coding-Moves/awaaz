@@ -47,7 +47,7 @@ const structuredData = {
           name: "Does Awaaz upload my text?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "No. Your text, files and reading progress stay in your browser on your device.",
+            text: "No. Awaaz does not upload your text or files. They are processed in your browser and your reading progress is saved on your device. If you choose a browser voice, that browser may use its own online voice service.",
           },
         },
         {
@@ -150,7 +150,7 @@ export default function Home() {
           </details>
           <details>
             <summary>Does Awaaz upload my text?</summary>
-            <p>No. Your text, files and reading progress stay in your browser on your device.</p>
+            <p>No. Awaaz does not upload your text or files. They are processed in your browser and your reading progress is saved on your device. If you choose a browser voice, that browser may use its own online voice service.</p>
           </details>
           <details>
             <summary>Does Awaaz work on phones and tablets?</summary>
