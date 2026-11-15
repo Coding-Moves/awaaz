@@ -43,6 +43,11 @@ function formatDuration(seconds: number) {
   return `${Math.floor(m / 60)}h ${m % 60}m`;
 }
 
+function formatRemaining(seconds: number) {
+  if (Math.round(seconds / 60) < 1) return "Less than a minute left";
+  return `~${formatDuration(seconds)} left`;
+}
+
 export default function Reader() {
   const [draft, setDraft] = useState("");
   const [book, setBook] = useState<Book | null>(null);
@@ -380,7 +385,7 @@ export default function Reader() {
             />
             <div className="progress-meta">
               <span>Sentence {(index + 1).toLocaleString()} of {total.toLocaleString()} · {Math.round(((index + 1) / Math.max(1, total)) * 100)}%</span>
-              <span>~{formatDuration(remaining)} left</span>
+              <span>{formatRemaining(remaining)}</span>
             </div>
 
             <div className="controls">
