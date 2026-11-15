@@ -227,7 +227,7 @@ export default function Reader() {
 
   useEffect(() => {
     if (!book || !("mediaSession" in navigator)) return;
-    navigator.mediaSession.metadata = new MediaMetadata({ title: book.title, artist: "Awaaz", album: "Coding Moves Lab" });
+    navigator.mediaSession.metadata = new MediaMetadata({ title: book.title, artist: "Awaaz", album: "Coding Moves" });
     const p = playerRef.current!;
     navigator.mediaSession.setActionHandler("play", () => void p.play());
     navigator.mediaSession.setActionHandler("pause", () => p.pause());

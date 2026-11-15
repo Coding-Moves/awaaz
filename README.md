@@ -1,6 +1,7 @@
 # Awaaz
 
 **Paste it. Press play. Just listen.**
+Awaaz is a free read-aloud web app from **Coding Moves**. Paste text or upload a PDF, EPUB or TXT book, and it reads it aloud in a natural voice. No sign-up is needed.
 
 <!-- TODO: Add the project logo when public/logo.svg is available. -->
 
