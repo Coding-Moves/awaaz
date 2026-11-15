@@ -2,6 +2,12 @@
   "name": "awaaz",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
+  "repository": "github:Coding-Moves/awaaz",
+  "homepage": "https://awaaz.codingmoves.com",
+  "bugs": {
+    "url": "https://github.com/Coding-Moves/awaaz/issues"
+  },
   "description": "Awaaz — free text-to-speech reader in your browser. A Coding Moves product.",
   "scripts": {
     "postinstall": "node scripts/copy-vendor.mjs",

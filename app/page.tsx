@@ -134,6 +134,39 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="contribute" id="contribute" aria-labelledby="contribute-title">
+        <p className="eyebrow">Open source</p>
+        <h2 id="contribute-title">Built in the open. Better with you.</h2>
+        <p className="contribute-intro">Awaaz is free and MIT-licensed. Found a bug, a word it says wrong, or a typo in the docs? Every small fix helps.</p>
+        <div className="capability-grid">
+          <article>
+            <h3>Spotted a bug?</h3>
+            <p><a href="https://github.com/Coding-Moves/awaaz/issues/new?template=bug_report.yml" target="_blank" rel="noopener noreferrer">Tell us what broke.</a></p>
+          </article>
+          <article>
+            <h3>Docs need your attention</h3>
+            <p><a href="https://github.com/Coding-Moves/awaaz/issues?q=is%3Aopen+label%3Adocumentation" target="_blank" rel="noopener noreferrer">Fix a typo or explain something better.</a></p>
+          </article>
+          <article>
+            <h3>First time contributing?</h3>
+            <p><a href="https://github.com/Coding-Moves/awaaz/issues?q=is%3Aopen+label%3A%22good+first+issue%22" target="_blank" rel="noopener noreferrer">Start with a good first issue.</a></p>
+          </article>
+          <article>
+            <h3>Got an idea?</h3>
+            <p><a href="https://github.com/Coding-Moves/awaaz/issues/new?template=feature_request.yml" target="_blank" rel="noopener noreferrer">Suggest a feature or a new voice.</a></p>
+          </article>
+        </div>
+        <div className="hero-actions">
+          <a className="button button-primary" href="https://github.com/Coding-Moves/awaaz" target="_blank" rel="noopener noreferrer">
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 .7a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.7-1.3-1.7-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.4-5.5-6A4.7 4.7 0 0 1 5.9 9c-.1-.3-.6-1.6.1-3.3 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 3 .1 3.3a4.7 4.7 0 0 1 1.2 3.3c0 4.6-2.8 5.7-5.5 6 .4.3.8 1 .8 2v3c0 .3.2.7.8.6A12 12 0 0 0 12 .7Z" />
+            </svg>
+            View on GitHub
+          </a>
+          <a className="button button-secondary" href="https://github.com/Coding-Moves/awaaz/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Read the contributing guide</a>
+        </div>
+      </section>
+
       <section className="faq" aria-labelledby="faq-title">
         <div className="section-heading">
           <p className="eyebrow">Good to know</p>
@@ -168,7 +201,7 @@ export default function Home() {
         </p>
         <div className="hero-actions">
           <a className="button button-primary" href="#reader">Start listening</a>
-          <a className="button button-secondary" href="https://codingmoves.com/products/contact/">Contact Coding Moves</a>
+          <a className="button button-secondary" href="#contribute">Contribute on GitHub</a>
         </div>
       </section>
     </>

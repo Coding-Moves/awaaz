@@ -49,6 +49,8 @@ footer {
 nav { display: flex; gap: 1.5rem; }
 nav a, footer a { color: var(--muted); font-size: .93rem; text-decoration: none; }
 nav a:hover, footer a:hover { color: var(--leaf-dark); text-decoration: underline; }
+nav a[aria-label="View Awaaz on GitHub"] { align-items: center; display: inline-flex; gap: .35rem; }
+.github-nav-label { position: static; width: auto; height: auto; clip: auto; margin: 0; overflow: visible; white-space: normal; }
 
 .faq { margin: auto; max-width: 1180px; padding: 6rem 2rem; }
 .faq-list { display: grid; gap: .75rem; margin-top: 2rem; max-width: 760px; }
@@ -120,6 +122,14 @@ p { margin-top: 0; }
 
 .capabilities { background: var(--mint); max-width: none; padding-left: max(2rem, calc((100vw - 1100px) / 2)); padding-right: max(2rem, calc((100vw - 1100px) / 2)); }
 .capability-grid { display: grid; gap: 2.5rem; grid-template-columns: repeat(3, 1fr); margin-top: 3rem; }
+
+.contribute { background: var(--paper); max-width: none; padding: 6rem max(2rem, calc((100vw - 1100px) / 2)); }
+.contribute h2 { margin-bottom: .75rem; }
+.contribute-intro { color: var(--muted); max-width: 650px; }
+.contribute .capability-grid { grid-template-columns: repeat(4, 1fr); }
+.contribute article a { color: var(--leaf-dark); font-weight: 700; }
+.contribute .hero-actions { margin-top: 3rem; }
+.button svg { display: inline-block; margin-right: .35rem; vertical-align: -.2em; }
 
 .closing { max-width: 780px; padding-bottom: 8rem; padding-top: 8rem; text-align: center; }
 .closing h2 { margin-bottom: .75rem; }
@@ -280,6 +290,8 @@ footer div { display: flex; gap: 1.1rem; }
   .site-header, footer { padding-left: 1.25rem; padding-right: 1.25rem; }
   nav { gap: .9rem; }
   nav a { font-size: .85rem; white-space: nowrap; }
+  .github-nav-label { clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; position: absolute; white-space: nowrap; width: 1px; }
+  nav a[aria-label="View Awaaz on GitHub"] svg { height: 18px; width: 18px; }
   .site-header { align-items: flex-start; }
   .hero, .steps, .capabilities, .closing { padding: 4.5rem 1.25rem; }
   .hero { padding-bottom: 2.5rem; padding-top: 3.5rem; }
@@ -292,4 +304,8 @@ footer div { display: flex; gap: 1.1rem; }
   .reading-panel { font-size: 1.08rem; padding: 1.1rem 1.1rem 2rem; }
   .controls { justify-content: center; }
   .settings { justify-content: center; }
+}
+
+@media (min-width: 701px) and (max-width: 900px) {
+  .contribute .capability-grid { grid-template-columns: repeat(2, 1fr); }
 }
