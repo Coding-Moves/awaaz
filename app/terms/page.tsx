@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Terms — Awaaz | Coding Moves Lab" };
+export const metadata: Metadata = { title: "Terms — Awaaz | Coding Moves" };
 
 export default function Terms() {
   return (
@@ -10,7 +10,7 @@ export default function Terms() {
       <p className="updated">Last updated: 15 November 2026</p>
 
       <h2>Free to use</h2>
-      <p>Awaaz is a free Coding Moves Lab experiment. You can use it for personal and work reading.</p>
+      <p>Awaaz is a free Coding Moves product. You can use it for personal and work reading.</p>
 
       <h2>Your content</h2>
       <p>
@@ -31,7 +31,7 @@ export default function Terms() {
       </p>
 
       <h2>Contact</h2>
-      <p>Reach the Lab at <a href="https://codingmoves.com/lab/contact/">codingmoves.com/lab/contact</a>.</p>
+      <p>Contact Coding Moves at <a href="https://codingmoves.com/products/contact/">codingmoves.com/products/contact</a>.</p>
     </article>
   );
 }

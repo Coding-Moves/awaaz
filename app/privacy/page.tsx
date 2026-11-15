@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Privacy — Awaaz | Coding Moves Lab" };
+export const metadata: Metadata = { title: "Privacy — Awaaz | Coding Moves" };
 
 export default function Privacy() {
   return (
@@ -41,7 +41,7 @@ export default function Privacy() {
       </p>
 
       <h2>Contact</h2>
-      <p>Questions? Reach the Lab at <a href="https://codingmoves.com/lab/contact/">codingmoves.com/lab/contact</a>.</p>
+      <p>Questions? Contact Coding Moves at <a href="https://codingmoves.com/products/contact/">codingmoves.com/products/contact</a>.</p>
     </article>
   );
 }
