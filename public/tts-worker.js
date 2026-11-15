@@ -23,6 +23,16 @@ function reportProgress(event) {
   self.postMessage({ type: "progress", loaded: l, total: t });
 }
 
+async function loadRuntime(runtimeDevice, runtimeDtype) {
+  const model = await KokoroTTS.from_pretrained(MODEL_ID, {
+    dtype: runtimeDtype,
+    device: runtimeDevice,
+    progress_callback: reportProgress,
+  });
+  await model.generate("Hi.", { voice: "af_heart" });
+  return model;
+}
+
 async function init() {
   if (tts) return tts;
   if (!loading) {
@@ -43,26 +53,17 @@ async function init() {
       dtype = adapter ? "fp32" : "q8";
 
       try {
-        return await KokoroTTS.from_pretrained(MODEL_ID, {
-          dtype,
-          device,
-          progress_callback: reportProgress,
-        });
+        return await loadRuntime(device, dtype);
       } catch (err) {
         if (device !== "webgpu") throw err;
         console.warn("[Awaaz] WebGPU model loading failed; falling back to WASM.", err);
         device = "wasm";
         dtype = "q8";
-        return KokoroTTS.from_pretrained(MODEL_ID, {
-          dtype,
-          device,
-          progress_callback: reportProgress,
-        });
+        return loadRuntime(device, dtype);
       }
     })();
   }
   tts = await loading;
-  await tts.generate("Hi.", { voice: "af_heart" });
   return tts;
 }
 
