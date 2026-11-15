@@ -3,6 +3,7 @@ export type Prepared = { paragraphs: number[][]; chunks: Chunk[] };
 
 const MAX_CHARS = 280; // Kokoro handles ~510 tokens; keep chunks short so audio starts fast
 const MIN_CHARS = 30; // merge tiny sentences ("Yes." "Hi.") with the next one
+const FIRST_CHUNK_MAX = 100;
 
 /** Normalise pasted / extracted text: fix hyphenated line breaks, keep paragraph breaks. */
 export function cleanText(raw: string): string {
@@ -77,6 +78,23 @@ export function prepareText(raw: string): Prepared {
     });
     if (ids.length) paragraphs.push(ids);
   });
+
+  const first = chunks[0];
+  if (first && first.text.length > FIRST_CHUNK_MAX) {
+    const comma = first.text.lastIndexOf(",", FIRST_CHUNK_MAX);
+    const space = first.text.lastIndexOf(" ", FIRST_CHUNK_MAX);
+    const splitAt = comma > 0 ? comma + 1 : space > 0 ? space : FIRST_CHUNK_MAX;
+    const firstText = first.text.slice(0, splitAt).trim();
+    const remainder = first.text.slice(splitAt).trim();
+
+    if (firstText && remainder) {
+      chunks.splice(0, 1, { text: firstText, para: first.para }, { text: remainder, para: first.para });
+      for (const ids of paragraphs) {
+        for (let i = 0; i < ids.length; i++) ids[i] += 1;
+      }
+      paragraphs[0]?.unshift(0);
+    }
+  }
 
   return { paragraphs, chunks };
 }

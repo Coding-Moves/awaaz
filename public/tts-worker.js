@@ -5,6 +5,9 @@ const MODEL_ID = "onnx-community/Kokoro-82M-v1.0-ONNX";
 
 let tts = null;
 let loading = null;
+let device = "wasm";
+let dtype = "q8";
+let initLogged = false;
 const files = new Map();
 
 function reportProgress(event) {
@@ -20,14 +23,45 @@ function reportProgress(event) {
   self.postMessage({ type: "progress", loaded: l, total: t });
 }
 
+async function loadRuntime(runtimeDevice, runtimeDtype) {
+  const model = await KokoroTTS.from_pretrained(MODEL_ID, {
+    dtype: runtimeDtype,
+    device: runtimeDevice,
+    progress_callback: reportProgress,
+  });
+  await model.generate("Hi.", { voice: "af_heart" });
+  return model;
+}
+
 async function init() {
   if (tts) return tts;
   if (!loading) {
-    loading = KokoroTTS.from_pretrained(MODEL_ID, {
-      dtype: "q8",
-      device: "wasm",
-      progress_callback: reportProgress,
-    });
+    loading = (async () => {
+      if (!initLogged) {
+        const threads = self.crossOriginIsolated ? navigator.hardwareConcurrency || 1 : 1;
+        console.info("[Awaaz] crossOriginIsolated:", Boolean(self.crossOriginIsolated), "wasm threads:", threads);
+        initLogged = true;
+      }
+
+      let adapter = null;
+      try {
+        adapter = navigator.gpu ? await navigator.gpu.requestAdapter() : null;
+      } catch {
+        adapter = null;
+      }
+      device = adapter ? "webgpu" : "wasm";
+      dtype = adapter ? "fp32" : "q8";
+
+      try {
+        return await loadRuntime(device, dtype);
+      } catch (err) {
+        if (device !== "webgpu") throw err;
+        console.warn("[Awaaz] WebGPU model loading failed; falling back to WASM.", err);
+        device = "wasm";
+        dtype = "q8";
+        return loadRuntime(device, dtype);
+      }
+    })();
   }
   tts = await loading;
   return tts;
@@ -38,7 +72,7 @@ self.onmessage = async (e) => {
   if (msg.type === "init") {
     try {
       await init();
-      self.postMessage({ type: "ready" });
+      self.postMessage({ type: "ready", device });
     } catch (err) {
       loading = null;
       self.postMessage({ type: "error", message: String(err && err.message ? err.message : err) });

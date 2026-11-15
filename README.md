@@ -6,9 +6,9 @@ Awaaz is a free read-aloud web app from **Coding Moves**. Paste text or upload a
 Live: https://awaaz.codingmoves.com
 
 ## How it works
-- **Natural voice:** [Kokoro-82M](https://huggingface.co/onnx-community/Kokoro-82M-v1.0-ONNX) through [kokoro-js](https://www.npmjs.com/package/kokoro-js). It runs in your browser inside a Web Worker (WASM, q8, about 90 MB, downloaded once and then cached).
+- **Natural voice:** [Kokoro-82M](https://huggingface.co/onnx-community/Kokoro-82M-v1.0-ONNX) through [kokoro-js](https://www.npmjs.com/package/kokoro-js). It uses WebGPU with fp32 when available, and falls back to WASM with q8, inside a Web Worker. The model is downloaded once and then cached.
 - **Instant fallback:** the browser's built-in Web Speech API. This also covers languages Kokoro doesn't support, such as Urdu, when the device has a voice for them.
-- **No waiting:** text is split into short sentence chunks. Chunk 1 starts playing as soon as it's ready, and the next 3 chunks are generated in the background.
+- **No waiting:** text is split into short sentence chunks. Chunk 1 starts playing as soon as it's ready, and the next 4 chunks are generated in the background.
 - **Private:** there is no backend and no database. Text, files and reading position stay on the device (IndexedDB).
 - **Files:** PDF uses pdf.js, EPUB uses JSZip and DOMParser, TXT/MD are read as plain text. Scanned PDFs (images) are not supported.
 
