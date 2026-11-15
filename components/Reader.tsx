@@ -247,6 +247,32 @@ export default function Reader() {
     if ("mediaSession" in navigator) navigator.mediaSession.playbackState = playing ? "playing" : "paused";
   }, [playing]);
 
+  /* ---------- input actions ---------- */
+
+  const handlePaste = useCallback(async () => {
+    warmUp();
+    if (typeof navigator === "undefined" || !navigator.clipboard || typeof navigator.clipboard.readText !== "function") {
+      setError("Clipboard access is not available in this browser. You can paste manually using Ctrl+V or your device's paste action.");
+      return;
+    }
+    try {
+      const text = await navigator.clipboard.readText();
+      setDraft(text);
+      setError(null);
+    } catch (err) {
+      if (err instanceof Error && (err.name === "NotAllowedError" || err.name === "SecurityError")) {
+        setError("Clipboard permission was denied. You can paste manually using Ctrl+V or your device's paste action.");
+      } else {
+        setError("Couldn't read from the clipboard. You can paste manually using Ctrl+V or your device's paste action.");
+      }
+    }
+  }, [warmUp]);
+
+  const handleClear = useCallback(() => {
+    setDraft("");
+    setError(null);
+  }, []);
+
   /* ---------- derived ---------- */
 
   const total = book?.prepared.chunks.length ?? 0;
@@ -327,9 +353,31 @@ export default function Reader() {
             <p className="hint">
               {draft.trim() ? `${draft.trim().split(/\s+/).length.toLocaleString()} words · about ${formatDuration(draft.length / CHARS_PER_SECOND)} to listen` : "Nothing is uploaded — your text stays on this device."}
             </p>
-            <button className="button button-primary" disabled={!draft.trim() || !!extracting} onClick={() => void openBook(draft)}>
-              Start listening
-            </button>
+            <div className="input-actions">
+              <button
+                type="button"
+                className="button button-secondary button-small"
+                onClick={() => void handlePaste()}
+              >
+                Paste
+              </button>
+              <button
+                type="button"
+                className="button button-secondary button-small"
+                onClick={handleClear}
+                disabled={!draft}
+              >
+                Clear
+              </button>
+              <button
+                type="button"
+                className="button button-primary"
+                disabled={!draft.trim() || !!extracting}
+                onClick={() => void openBook(draft)}
+              >
+                Start listening
+              </button>
+            </div>
           </div>
           {error && <p className="error-text" role="alert">{error}</p>}
 
