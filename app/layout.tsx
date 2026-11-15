@@ -5,9 +5,24 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://awaaz.codingmoves.com"),
-  title: "Awaaz — free read-aloud | Coding Moves Lab",
+  title: "Awaaz — free read-aloud | Coding Moves",
   description:
-    "Awaaz reads your text and books aloud with a natural voice. Free, no sign-up, and your text never leaves your device. A Coding Moves Lab experiment.",
+    "Awaaz reads your text and books aloud with a natural voice. Free, no sign-up, and your text never leaves your device. A Coding Moves product.",
+  applicationName: "Awaaz",
+  keywords: [
+    "text to speech",
+    "read aloud",
+    "free text to speech",
+    "PDF reader",
+    "EPUB reader",
+    "private text to speech",
+  ],
+  authors: [{ name: "Coding Moves", url: "https://codingmoves.com" }],
+  creator: "Coding Moves",
+  publisher: "Coding Moves",
+  category: "productivity",
+  referrer: "origin-when-cross-origin",
+  robots: { index: true, follow: true },
   alternates: { canonical: "/" },
   icons: {
     icon: [
@@ -18,10 +33,18 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Awaaz — paste it, press play, just listen",
-    description: "Free, private text-to-speech for your books and notes. A Coding Moves Lab experiment.",
+    description: "Free, private text-to-speech for your books and notes from Coding Moves.",
     url: "https://awaaz.codingmoves.com",
     siteName: "Awaaz",
     type: "website",
+    locale: "en_US",
+    images: [{ url: "/awaaz-logo/preview.png", width: 900, height: 360, alt: "Awaaz free read-aloud app" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Awaaz — paste it, press play, just listen",
+    description: "Free, private text-to-speech for books, notes and articles.",
+    images: ["/awaaz-logo/preview.png"],
   },
 };
 
@@ -36,11 +59,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Link className="brand" href="/" aria-label="Awaaz home">
               <Image src="/awaaz-logo/awaaz-wordmark.svg" alt="Awaaz" width={156} height={42} priority />
             </Link>
-            <a className="brand-family" href="https://codingmoves.com/lab/">A Coding Moves Lab experiment</a>
+            <a className="brand-family" href="https://codingmoves.com/products/">A Coding Moves product</a>
           </div>
           <nav aria-label="Primary navigation">
             <Link href="/#how-it-works">How it works</Link>
-            <a href="https://codingmoves.com/lab/contact/">Contact</a>
+            <a href="https://codingmoves.com/products/contact/">Contact</a>
             <Link href="/privacy/">Privacy</Link>
           </nav>
         </header>
@@ -48,7 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <footer>
           <p>© 2026 <a href="https://codingmoves.com/">Coding Moves</a></p>
           <div>
-            <a href="https://codingmoves.com/lab/contact/">Contact</a>
+            <a href="https://codingmoves.com/products/contact/">Contact</a>
             <Link href="/privacy/">Privacy</Link>
             <Link href="/terms/">Terms</Link>
             <a href="https://github.com/Coding-Moves/awaaz">GitHub</a>

@@ -2,7 +2,7 @@
   "name": "awaaz",
   "version": "0.1.0",
   "private": true,
-  "description": "Awaaz — free text-to-speech reader in your browser. A Coding Moves Lab experiment.",
+  "description": "Awaaz — free text-to-speech reader in your browser. A Coding Moves product.",
   "scripts": {
     "postinstall": "node scripts/copy-vendor.mjs",
     "dev": "next dev",

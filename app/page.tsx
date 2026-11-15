@@ -1,8 +1,72 @@
 import Reader from "@/components/ReaderClient";
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      name: "Awaaz",
+      url: "https://awaaz.codingmoves.com",
+      description:
+        "A free, private read-aloud app for listening to pasted text, PDFs, EPUBs and TXT files in your browser.",
+      applicationCategory: "ProductivityApplication",
+      operatingSystem: "Any",
+      browserRequirements: "Requires JavaScript and a modern browser.",
+      isAccessibleForFree: true,
+      image: "https://awaaz.codingmoves.com/awaaz-logo/preview.png",
+      author: { "@type": "Organization", name: "Coding Moves", url: "https://codingmoves.com" },
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      featureList: [
+        "Natural and browser text-to-speech voices",
+        "PDF, EPUB and TXT reading",
+        "Sentence highlighting and playback controls",
+        "Local-only reading progress",
+      ],
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "Is Awaaz free?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. Awaaz is free to use with no account, subscription or paywall.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can I use Awaaz with a PDF or EPUB?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. Awaaz can read text-based PDFs, EPUBs and TXT files, as well as text pasted into the reader.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Does Awaaz upload my text?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "No. Your text, files and reading progress stay in your browser on your device.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Does Awaaz work on phones and tablets?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. Awaaz runs in modern mobile and desktop browsers, with a browser voice fallback when the natural voice is unavailable.",
+          },
+        },
+      ],
+    },
+  ],
+};
+
 export default function Home() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <section className="hero" aria-labelledby="hero-title">
         <p className="eyebrow">Free read-aloud for busy people</p>
         <h1 id="hero-title">Paste it. Press play.<br />Just listen.</h1>
@@ -70,16 +134,41 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="faq" aria-labelledby="faq-title">
+        <div className="section-heading">
+          <p className="eyebrow">Good to know</p>
+          <h2 id="faq-title">Questions people ask before listening.</h2>
+        </div>
+        <div className="faq-list">
+          <details>
+            <summary>Is Awaaz free?</summary>
+            <p>Yes. Awaaz is free to use with no account, subscription or paywall.</p>
+          </details>
+          <details>
+            <summary>Can I use Awaaz with a PDF or EPUB?</summary>
+            <p>Yes. Awaaz reads text-based PDFs, EPUBs and TXT files, as well as text pasted into the reader.</p>
+          </details>
+          <details>
+            <summary>Does Awaaz upload my text?</summary>
+            <p>No. Your text, files and reading progress stay in your browser on your device.</p>
+          </details>
+          <details>
+            <summary>Does Awaaz work on phones and tablets?</summary>
+            <p>Yes. Awaaz works in modern mobile and desktop browsers, with a browser voice fallback when needed.</p>
+          </details>
+        </div>
+      </section>
+
       <section className="closing" aria-labelledby="closing-title">
-        <p className="eyebrow">Coding Moves Lab</p>
-        <h2 id="closing-title">Awaaz is an open-source experiment, free for everyone.</h2>
+        <p className="eyebrow">A Coding Moves product</p>
+        <h2 id="closing-title">Awaaz is an open-source read-aloud app, free for everyone.</h2>
         <p>
           No paywalls and no accounts — just a clean reader that respects your time. Have feedback or
-          an idea? The Lab would love to hear it.
+          an idea? Coding Moves would love to hear it.
         </p>
         <div className="hero-actions">
           <a className="button button-primary" href="#reader">Start listening</a>
-          <a className="button button-secondary" href="https://codingmoves.com/lab/contact/">Contact the Lab</a>
+          <a className="button button-secondary" href="https://codingmoves.com/products/contact/">Contact Coding Moves</a>
         </div>
       </section>
     </>
