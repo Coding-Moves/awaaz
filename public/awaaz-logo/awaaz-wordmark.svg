@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 140">
+  <g transform="translate(10 10) scale(0.234375)">
+    <rect width="512" height="512" rx="112" fill="#18352e"/>
+    <g fill="#f2c46e">
+      <rect x="166" y="170" width="36" height="96" rx="18"/>
+      <rect x="238" y="104" width="36" height="162" rx="18"/>
+      <rect x="310" y="146" width="36" height="120" rx="18"/>
+    </g>
+    <path d="M256 318 C214 292 160 284 108 292 L108 400 C160 392 214 400 256 426 Z" fill="#f9f7f1"/>
+    <path d="M256 318 C298 292 352 284 404 292 L404 400 C352 392 298 400 256 426 Z" fill="#dbe1d6"/>
+  </g>
+  <text x="152" y="92" font-family="Georgia, serif" font-weight="700" font-size="76" letter-spacing="-3.5" fill="#18352e">Awaaz</text>
+</svg>
